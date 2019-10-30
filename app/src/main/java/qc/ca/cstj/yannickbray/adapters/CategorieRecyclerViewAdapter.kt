@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.item_categorie.view.*
 import qc.ca.cstj.yannickbray.R
 import qc.ca.cstj.yannickbray.models.Categorie
 import qc.ca.cstj.yannickbray.ui.categorie.CategorieFragment
+import qc.ca.cstj.yannickbray.ui.categorie.CategorieFragmentDirections
 
 class CategorieRecyclerViewAdapter(private val values: List<Categorie>) : RecyclerView.Adapter<CategorieRecyclerViewAdapter.ViewHolder>(){
 
@@ -27,6 +28,7 @@ class CategorieRecyclerViewAdapter(private val values: List<Categorie>) : Recycl
             view.setOnClickListener {
                 val categorie = it.tag as Categorie
 
+                val direction = CategorieFragmentDirections.actionNavCategorieToNavLivreCategorie(categorie)
                 it.findNavController().navigate(direction)
             }
             bind(item)
