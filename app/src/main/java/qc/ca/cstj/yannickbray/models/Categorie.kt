@@ -1,3 +1,6 @@
 package qc.ca.cstj.yannickbray.models
 
-data class Categorie(val name: String) : java.io.Serializable
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Categorie(val nom: String) : java.io.Serializable

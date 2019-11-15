@@ -37,7 +37,7 @@ class CategorieRecyclerViewAdapter(private val values: List<Categorie>) : Recycl
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         fun bind(categorie: Categorie) {
-            view.txvNom.text = categorie.name
+            view.txvNom.text = categorie.nom
         }
     }
 }
