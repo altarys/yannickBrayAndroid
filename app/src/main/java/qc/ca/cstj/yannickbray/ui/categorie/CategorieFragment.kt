@@ -38,6 +38,7 @@ class CategorieFragment : Fragment() {
 
         rcvCategorie.layoutManager = LinearLayoutManager(this.context)
         loadCategories()
+        this.activity?.setTitle(R.string.menu_categorie)
     }
 
     private fun loadCategories() {
