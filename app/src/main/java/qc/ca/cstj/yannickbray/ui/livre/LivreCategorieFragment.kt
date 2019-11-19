@@ -7,8 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.fuel.json.responseJson
+import com.github.kittinunf.result.Result
+import kotlinx.android.synthetic.main.fragment_categorie.*
+import kotlinx.android.synthetic.main.fragment_livre_categorie.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.list
 
 import qc.ca.cstj.yannickbray.R
+import qc.ca.cstj.yannickbray.Services
+import qc.ca.cstj.yannickbray.adapters.CategorieRecyclerViewAdapter
+import qc.ca.cstj.yannickbray.adapters.LivreRecyclerViewAdapter
+import qc.ca.cstj.yannickbray.models.Categorie
 import qc.ca.cstj.yannickbray.models.Livre
 
 /**
@@ -27,7 +39,22 @@ class LivreCategorieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        args.categorie.nom
+        rcvLivre.layoutManager = LinearLayoutManager(this.context)
+        loadLivre()
+    }
+
+    private fun loadLivre() {
+        val url = Services.API_URL_GET_LIVRE_BY_CATEGORIE + args.categorie.nom
+        url.httpGet().responseJson { request, response, result ->
+            when(result) {
+                is Result.Success -> {
+
+                    livres = Json.parse(Livre.serializer().list,  result.value.obj()["results"].toString())
+                    rcvLivre.adapter = LivreRecyclerViewAdapter(livres)
+                    rcvLivre.adapter!!.notifyDataSetChanged()
+                }
+            }
+        }
     }
 
 
