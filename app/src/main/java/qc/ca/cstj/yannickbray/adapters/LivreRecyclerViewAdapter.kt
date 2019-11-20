@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.item_livre.view.*
 import qc.ca.cstj.yannickbray.R
 import qc.ca.cstj.yannickbray.models.Livre
 import qc.ca.cstj.yannickbray.ui.categorie.CategorieFragmentDirections
+import qc.ca.cstj.yannickbray.ui.livre.LivreCategorieFragment
+import qc.ca.cstj.yannickbray.ui.livre.LivreCategorieFragmentDirections
 
 class LivreRecyclerViewAdapter(private val values: List<Livre>) : RecyclerView.Adapter<LivreRecyclerViewAdapter.ViewHolder>() {
 
@@ -29,12 +31,12 @@ class LivreRecyclerViewAdapter(private val values: List<Livre>) : RecyclerView.A
 
         with(holder) {
             view.tag = item
-            /*view.setOnClickListener {
+            view.setOnClickListener {
                 val livre = it.tag as Livre
 
-                val direction = CategorieFragmentDirections.actionNavCategorieToNavLivreCategorie(categorie)
+                val direction = LivreCategorieFragmentDirections.actionNavLivreCategorieToDetailLivreFragment(livre)
                 it.findNavController().navigate(direction)
-            }*/
+            }
             bind(item)
         }
     }

@@ -52,6 +52,11 @@
         <argument
             android:name="categorie"
             app:argType="qc.ca.cstj.yannickbray.models.Categorie" />
+        <action
+            android:id="@+id/action_nav_livre_categorie_to_detailLivreFragment"
+            app:destination="@id/nav_detail_livre"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/nav_detail_succursale"
@@ -61,5 +66,13 @@
         <argument
             android:name="succursale"
             app:argType="qc.ca.cstj.yannickbray.models.Succursale" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_detail_livre"
+        android:name="qc.ca.cstj.yannickbray.ui.livre.DetailLivreFragment"
+        tools:layout="@layout/fragment_detail_livre">
+        <argument
+            android:name="livre"
+            app:argType="qc.ca.cstj.yannickbray.models.Livre" />
     </fragment>
 </navigation>
