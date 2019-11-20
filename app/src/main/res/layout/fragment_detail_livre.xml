@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgLivre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/img_livre_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txvEnTeteCommentaires"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/txv_en_tete_commentaires"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/imgLivre"
+        app:layout_constraintTop_toBottomOf="@+id/imgLivre" />
+
+    <TextView
+        android:id="@+id/txvPrixLivre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/txv_prix_livre"
+        android:textAlignment="viewEnd"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgLivre" />
+
+    <TextView
+        android:id="@+id/txvAuteurLivre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/txv_auteur_livre"
+        android:textAlignment="viewEnd"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/txvPrixLivre"
+        app:layout_constraintTop_toBottomOf="@+id/txvPrixLivre" />
+
+    <TextView
+        android:id="@+id/txvCategorieLivre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/txv_categorie_livre"
+        android:textAlignment="viewEnd"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/txvAuteurLivre"
+        app:layout_constraintTop_toBottomOf="@+id/txvAuteurLivre" />
+
+    <TextView
+        android:id="@+id/txvCodeLivre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/txv_code_livre"
+        android:textAlignment="viewEnd"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/txvCategorieLivre"
+        app:layout_constraintTop_toBottomOf="@+id/txvCategorieLivre" />
+</androidx.constraintlayout.widget.ConstraintLayout>

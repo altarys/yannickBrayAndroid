@@ -8,6 +8,14 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Livre detail -->
+    <string name="img_livre_description">Image du livre</string>
+    <string name="txv_en_tete_commentaires"><u>Commentaires</u></string>
+    <string name="txv_prix_livre">Prix du livre</string>
+    <string name="txv_auteur_livre">Auteur du livre</string>
+    <string name="txv_categorie_livre">Categories du livre</string>
+    <string name="txv_code_livre">Code du livre</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
