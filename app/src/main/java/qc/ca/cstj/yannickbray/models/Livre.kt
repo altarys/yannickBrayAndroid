@@ -1,3 +1,6 @@
 package qc.ca.cstj.yannickbray.models
 
-data class Livre(val name: String) : java.io.Serializable
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Livre(val categorie: String, val titre: String, val prix: Double, val auteur: String, val sujet: String, val ISBN: Int, val imgurl: String, val commentaires: List<Commentaire>, val inventaires: Inventaire, val href: String, val version: String) : java.io.Serializable
