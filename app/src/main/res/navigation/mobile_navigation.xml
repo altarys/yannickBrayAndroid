@@ -36,8 +36,8 @@
     <fragment
         android:id="@+id/nav_categorie"
         android:name="qc.ca.cstj.yannickbray.ui.categorie.CategorieFragment"
-        android:label="fragment_categorie"
-        tools:layout="@layout/fragment_categorie" >
+        android:label="Catégories"
+        tools:layout="@layout/fragment_categorie">
         <action
             android:id="@+id/action_nav_categorie_to_nav_livre_categorie"
             app:destination="@id/nav_livre_categorie"
@@ -47,8 +47,8 @@
     <fragment
         android:id="@+id/nav_livre_categorie"
         android:name="qc.ca.cstj.yannickbray.ui.livre.LivreCategorieFragment"
-        android:label="fragment_livre_categorie"
-        tools:layout="@layout/fragment_livre_categorie" >
+        android:label="Livres"
+        tools:layout="@layout/fragment_livre_categorie">
         <argument
             android:name="categorie"
             app:argType="qc.ca.cstj.yannickbray.models.Categorie" />
