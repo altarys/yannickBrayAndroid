@@ -21,11 +21,11 @@
         android:id="@+id/txvEnTeteCommentaires"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="240dp"
         android:text="@string/txv_en_tete_commentaires"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/imgLivre"
-        app:layout_constraintTop_toBottomOf="@+id/imgLivre" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txvPrixLivre"
@@ -74,5 +74,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/imgLivre"
         app:layout_constraintEnd_toEndOf="@+id/txvCategorieLivre"
         app:layout_constraintTop_toBottomOf="@+id/txvCategorieLivre" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvCommentaires"
+        android:layout_width="0dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/txvCodeLivre"
+        app:layout_constraintStart_toStartOf="@+id/txvEnTeteCommentaires"
+        app:layout_constraintTop_toBottomOf="@+id/txvEnTeteCommentaires" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

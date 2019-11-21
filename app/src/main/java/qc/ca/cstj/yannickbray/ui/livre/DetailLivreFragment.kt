@@ -11,13 +11,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.ContentFrameLayout
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.app_bar_navigation.*
 import kotlinx.android.synthetic.main.content_navigation.*
 import kotlinx.android.synthetic.main.fragment_detail_livre.*
+import kotlinx.android.synthetic.main.fragment_livre_categorie.*
 
 import qc.ca.cstj.yannickbray.R
+import qc.ca.cstj.yannickbray.adapters.CommentaireRecyclerViewAdapter
 import qc.ca.cstj.yannickbray.models.Livre
 
 /**
@@ -39,6 +42,13 @@ class DetailLivreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        rcvCommentaires.layoutManager = LinearLayoutManager(this.context)
+
+        loadDetailsLivre()
+        loadCommentairesLivre()
+    }
+
+    private fun loadDetailsLivre(){
         val livre = args.livre
 
         (activity as AppCompatActivity).supportActionBar?.title = livre.titre
@@ -48,5 +58,12 @@ class DetailLivreFragment : Fragment() {
         txvPrixLivre.text = "%.2f".format(livre.prix) + " $"
 
         Picasso.get().load(livre.imgurl).fit().centerInside().into(imgLivre)
+    }
+
+    private fun loadCommentairesLivre(){
+        val commentaires = args.livre.commentaires
+
+        rcvCommentaires.adapter = CommentaireRecyclerViewAdapter(commentaires)
+        rcvCommentaires.adapter!!.notifyDataSetChanged()
     }
 }
