@@ -48,12 +48,11 @@ class DetailLivreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        commentaires = args.livre.commentaires
+        commentaires = args.livre.commentaires.sortedWith(compareByDescending { it.dateCommentaire })
 
         rcvCommentaires.layoutManager = LinearLayoutManager(this.context)
 
         loadDetailsLivre()
-        // getCommentairesLivre()
         loadCommentairesLivre()
 
         btnAjouter.setOnClickListener {
@@ -68,26 +67,24 @@ class DetailLivreFragment : Fragment() {
                     .header("Content-Type" to "application/json")
                         .body(Json.stringify(Commentaire.serializer(), commentaire), Charset.forName("UTF-8"))
                             .responseJson { request, response, result ->
-                        if (response.statusCode == 201){
-                            /*when(result) {
-                                is Result.Success -> {
-                                    var livres = Json.parse(Livre.serializer().list,  result.value.obj()["results"].toString())
-                                    commentaires = livres.first().commentaires
-                                }
-                            }*/
+                       
+                        when(result) {
+                            is Result.Success -> {
+                                var livre = Json.parse(Livre.serializer(), result.value.content)
+                                commentaires = livre.commentaires.sortedWith(compareByDescending { it.dateCommentaire })
+                                txtCommentaire.text = Editable.Factory.getInstance().newEditable("")
+                                txtUtilisateur.text = Editable.Factory.getInstance().newEditable("")
+                                rtbRating.rating = 0.0f
 
-                            txtCommentaire.text = Editable.Factory.getInstance().newEditable("")
-                            txtUtilisateur.text = Editable.Factory.getInstance().newEditable("")
-                            rtbRating.rating = 0.0f
+                                loadCommentairesLivre()
 
+                                Toast.makeText(this.context, getString(R.string.alerte_commentaire_ajoute), Toast.LENGTH_LONG).show()
 
+                            }
+                            is Result.Failure -> {
+                                Toast.makeText(this.context, getString(R.string.alerte_commentaire_erreur), Toast.LENGTH_LONG).show()
+                            }
 
-                            // getCommentairesLivre()
-                            loadCommentairesLivre()
-
-                            Toast.makeText(this.context, getString(R.string.alerte_commentaire_ajoute), Toast.LENGTH_LONG).show()
-                        } else {
-                            Toast.makeText(this.context, getString(R.string.alerte_commentaire_erreur), Toast.LENGTH_LONG).show()
                         }
                     }
             } else {
