@@ -13,6 +13,7 @@ import qc.ca.cstj.yannickbray.ui.categorie.CategorieFragmentDirections
 
 class CategorieRecyclerViewAdapter(private val values: List<Categorie>) : RecyclerView.Adapter<CategorieRecyclerViewAdapter.ViewHolder>(){
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategorieRecyclerViewAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_categorie, parent, false)
         return ViewHolder(view)
@@ -28,15 +29,18 @@ class CategorieRecyclerViewAdapter(private val values: List<Categorie>) : Recycl
             view.setOnClickListener {
                 val categorie = it.tag as Categorie
 
+                // On set la categorie dans les arguments de la navigation
                 val direction = CategorieFragmentDirections.actionNavCategorieToNavLivreCategorie(categorie)
                 it.findNavController().navigate(direction)
             }
+
             bind(item)
         }
     }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         fun bind(categorie: Categorie) {
+            // On lie le nom de la catégorie au champ texte de la vue.
             view.txvNom.text = categorie.nom
         }
     }
