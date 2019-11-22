@@ -15,9 +15,14 @@
     <string name="txv_auteur_livre">Auteur du livre</string>
     <string name="txv_categorie_livre">Categories du livre</string>
     <string name="txv_code_livre">Code du livre</string>
+
+    <!-- Ajout commentaire -->
     <string name="txt_utilisateur">Votre nom et prénom</string>
     <string name="txb_commentaire">Votre commentaire</string>
     <string name="btn_ajouter_commentaire">Ajouter</string>
+    <string name="alerte_commentaire_incomplet">Veuillez préciser un nom et une cote</string>
+    <string name="alerte_commentaire_erreur">Il y a eut une erreur lors de l\'ajout de votre commentaire. Veuillez réessayer plus tard</string>
+    <string name="alerte_commentaire_ajoute">Votre commentaire a été ajouté</string>
 
     <string name="menu_home">Accueil</string>
     <string name="menu_gallery">Gallery</string>

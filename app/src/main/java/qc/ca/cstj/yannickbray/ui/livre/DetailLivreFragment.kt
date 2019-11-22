@@ -2,29 +2,31 @@ package qc.ca.cstj.yannickbray.ui.livre
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.ContentFrameLayout
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
+import com.github.kittinunf.fuel.json.responseJson
+import com.github.kittinunf.result.Result
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_navigation.*
-import kotlinx.android.synthetic.main.app_bar_navigation.*
-import kotlinx.android.synthetic.main.content_navigation.*
 import kotlinx.android.synthetic.main.fragment_detail_livre.*
 import kotlinx.android.synthetic.main.fragment_livre_categorie.*
-
+import kotlinx.android.synthetic.main.item_commentaire.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.list
 import qc.ca.cstj.yannickbray.R
-import qc.ca.cstj.yannickbray.Services
 import qc.ca.cstj.yannickbray.adapters.CommentaireRecyclerViewAdapter
+import qc.ca.cstj.yannickbray.adapters.LivreRecyclerViewAdapter
 import qc.ca.cstj.yannickbray.models.Commentaire
 import qc.ca.cstj.yannickbray.models.Livre
+import java.nio.charset.Charset
 
 /**
  * A simple [Fragment] subclass.
@@ -32,6 +34,7 @@ import qc.ca.cstj.yannickbray.models.Livre
 class DetailLivreFragment : Fragment() {
 
     private val args: DetailLivreFragmentArgs by navArgs()
+    private var commentaires = listOf<Commentaire>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,15 +51,40 @@ class DetailLivreFragment : Fragment() {
         rcvCommentaires.layoutManager = LinearLayoutManager(this.context)
 
         loadDetailsLivre()
+        getCommentairesLivre()
         loadCommentairesLivre()
 
-        /*btnAjouter.setOnClickListener {
+        btnAjouter.setOnClickListener {
             val message: String = txtCommentaire.text.toString()
             val utilisateur: String = txtUtilisateur.text.toString()
             val etoile: Int = rtbNouveauCommentaire.rating.toInt()
 
             val commentaire: Commentaire = Commentaire(utilisateur = utilisateur, message = message,  etoile = etoile, dateCommentaire = "")
-        }*/
+
+            if (commentaire.utilisateur.isNotEmpty() && commentaire.etoile != 0) {
+                "${args.livre.href}/commentaires".httpPost()
+                    .header("Content-Type" to "application/json")
+                    .body(Json.stringify(Commentaire.serializer(), commentaire), Charset.forName("UTF-8"))
+                    .responseJson { request, response, result ->
+                        if (response.statusCode == 201){
+                            txtCommentaire.text = Editable.Factory.getInstance().newEditable("")
+                            txtUtilisateur.text = Editable.Factory.getInstance().newEditable("")
+                            rtbRating.rating = 0.0f
+
+
+
+                            getCommentairesLivre()
+                            loadCommentairesLivre()
+
+                            Toast.makeText(this.context, getString(R.string.alerte_commentaire_ajoute), Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this.context, getString(R.string.alerte_commentaire_erreur), Toast.LENGTH_LONG).show()
+                        }
+                    }
+            } else {
+                Toast.makeText(this.context, getString(R.string.alerte_commentaire_incomplet), Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun loadDetailsLivre(){
@@ -72,9 +100,19 @@ class DetailLivreFragment : Fragment() {
     }
 
     private fun loadCommentairesLivre(){
-        val commentaires = args.livre.commentaires
-
         rcvCommentaires.adapter = CommentaireRecyclerViewAdapter(commentaires)
         rcvCommentaires.adapter!!.notifyDataSetChanged()
+    }
+
+    private fun getCommentairesLivre() {
+        var livres = listOf<Livre>()
+        args.livre.href.httpGet().responseJson { request, response, result ->
+            when(result) {
+                is Result.Success -> {
+                    livres = Json.parse(Livre.serializer().list,  result.value.obj()["results"].toString())
+                    commentaires = livres.first().commentaires
+                }
+            }
+        }
     }
 }
