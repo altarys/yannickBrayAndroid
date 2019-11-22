@@ -27,8 +27,9 @@ class CommentaireRecyclerViewAdapter(private val values: List<Commentaire>) : Re
 
     inner class  ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(commentaire: Commentaire) {
+            view.txvUtilisateur.text = commentaire.utilisateur
             view.txvCommentaire.text = commentaire.message
-            view.txvDate.text = commentaire.dateCommentaire.substringBefore('T')
+            view.txvDate.text = commentaire.dateCommentaire?.substringBefore('T')
             view.rtbRating.rating = commentaire.etoile.toFloat()
         }
     }

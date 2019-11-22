@@ -12,6 +12,7 @@ import androidx.appcompat.widget.ContentFrameLayout
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.kittinunf.fuel.httpPost
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.app_bar_navigation.*
@@ -20,7 +21,9 @@ import kotlinx.android.synthetic.main.fragment_detail_livre.*
 import kotlinx.android.synthetic.main.fragment_livre_categorie.*
 
 import qc.ca.cstj.yannickbray.R
+import qc.ca.cstj.yannickbray.Services
 import qc.ca.cstj.yannickbray.adapters.CommentaireRecyclerViewAdapter
+import qc.ca.cstj.yannickbray.models.Commentaire
 import qc.ca.cstj.yannickbray.models.Livre
 
 /**
@@ -46,6 +49,14 @@ class DetailLivreFragment : Fragment() {
 
         loadDetailsLivre()
         loadCommentairesLivre()
+
+        /*btnAjouter.setOnClickListener {
+            val message: String = txtCommentaire.text.toString()
+            val utilisateur: String = txtUtilisateur.text.toString()
+            val etoile: Int = rtbNouveauCommentaire.rating.toInt()
+
+            val commentaire: Commentaire = Commentaire(utilisateur = utilisateur, message = message,  etoile = etoile, dateCommentaire = "")
+        }*/
     }
 
     private fun loadDetailsLivre(){

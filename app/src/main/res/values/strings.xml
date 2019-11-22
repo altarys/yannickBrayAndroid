@@ -15,6 +15,9 @@
     <string name="txv_auteur_livre">Auteur du livre</string>
     <string name="txv_categorie_livre">Categories du livre</string>
     <string name="txv_code_livre">Code du livre</string>
+    <string name="txt_utilisateur">Votre nom et prénom</string>
+    <string name="txb_commentaire">Votre commentaire</string>
+    <string name="btn_ajouter_commentaire">Ajouter</string>
 
     <string name="menu_home">Accueil</string>
     <string name="menu_gallery">Gallery</string>
