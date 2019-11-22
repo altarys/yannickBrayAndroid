@@ -48,10 +48,12 @@ class DetailLivreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        commentaires = args.livre.commentaires
+
         rcvCommentaires.layoutManager = LinearLayoutManager(this.context)
 
         loadDetailsLivre()
-        getCommentairesLivre()
+        // getCommentairesLivre()
         loadCommentairesLivre()
 
         btnAjouter.setOnClickListener {
@@ -64,16 +66,23 @@ class DetailLivreFragment : Fragment() {
             if (commentaire.utilisateur.isNotEmpty() && commentaire.etoile != 0) {
                 "${args.livre.href}/commentaires".httpPost()
                     .header("Content-Type" to "application/json")
-                    .body(Json.stringify(Commentaire.serializer(), commentaire), Charset.forName("UTF-8"))
-                    .responseJson { request, response, result ->
+                        .body(Json.stringify(Commentaire.serializer(), commentaire), Charset.forName("UTF-8"))
+                            .responseJson { request, response, result ->
                         if (response.statusCode == 201){
+                            /*when(result) {
+                                is Result.Success -> {
+                                    var livres = Json.parse(Livre.serializer().list,  result.value.obj()["results"].toString())
+                                    commentaires = livres.first().commentaires
+                                }
+                            }*/
+
                             txtCommentaire.text = Editable.Factory.getInstance().newEditable("")
                             txtUtilisateur.text = Editable.Factory.getInstance().newEditable("")
                             rtbRating.rating = 0.0f
 
 
 
-                            getCommentairesLivre()
+                            // getCommentairesLivre()
                             loadCommentairesLivre()
 
                             Toast.makeText(this.context, getString(R.string.alerte_commentaire_ajoute), Toast.LENGTH_LONG).show()
@@ -102,17 +111,5 @@ class DetailLivreFragment : Fragment() {
     private fun loadCommentairesLivre(){
         rcvCommentaires.adapter = CommentaireRecyclerViewAdapter(commentaires)
         rcvCommentaires.adapter!!.notifyDataSetChanged()
-    }
-
-    private fun getCommentairesLivre() {
-        var livres = listOf<Livre>()
-        args.livre.href.httpGet().responseJson { request, response, result ->
-            when(result) {
-                is Result.Success -> {
-                    livres = Json.parse(Livre.serializer().list,  result.value.obj()["results"].toString())
-                    commentaires = livres.first().commentaires
-                }
-            }
-        }
     }
 }
