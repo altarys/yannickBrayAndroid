@@ -98,7 +98,13 @@ class DetailLivreFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = livre.titre
         txvAuteurLivre.text = livre.auteur
-        txvCategorieLivre.text = livre.categorie
+        var lesCategories: StringBuilder = java.lang.StringBuilder()
+        for (x in 0 until livre.categories.count()){
+            if (x > 0)
+                lesCategories.append(", ")
+            lesCategories.append(livre.categories[x].nom)
+        }
+        txvCategorieLivre.text = lesCategories
         txvCodeLivre.text = livre.ISBN.toString()
         txvPrixLivre.text = "%.2f".format(livre.prix) + " $"
 

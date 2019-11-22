@@ -11,8 +11,7 @@
 
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
 
 
 
@@ -35,11 +34,11 @@
             android:id="@+id/txvEnTeteCommentaires"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="230dp"
+            android:layout_marginTop="16dp"
             android:text="@string/txv_en_tete_commentaires"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@+id/imgLivre"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imgLivre" />
 
         <TextView
             android:id="@+id/txvPrixLivre"
