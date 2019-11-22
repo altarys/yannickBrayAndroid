@@ -40,15 +40,19 @@ class LivreCategorieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rcvLivre.layoutManager = LinearLayoutManager(this.context)
+
+        // On charge tous les livres de la catégorie choisie
         loadLivre()
     }
 
     private fun loadLivre() {
+
         val url = Services.API_URL_GET_LIVRE_BY_CATEGORIE + args.categorie.nom
+        // On appel le service avec la catégorie choisi, elle retourne une liste de livres en JSON
         url.httpGet().responseJson { request, response, result ->
             when(result) {
                 is Result.Success -> {
-
+                    // Si on arrive à faire une requête à la BD. On insère les livres de la catégories dans le recyclerView
                     livres = Json.parse(Livre.serializer().list,  result.value.obj()["results"].toString())
                     rcvLivre.adapter = LivreRecyclerViewAdapter(livres)
                     rcvLivre.adapter!!.notifyDataSetChanged()

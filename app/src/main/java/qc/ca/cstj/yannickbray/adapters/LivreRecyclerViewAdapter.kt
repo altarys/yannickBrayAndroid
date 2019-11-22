@@ -34,6 +34,7 @@ class LivreRecyclerViewAdapter(private val values: List<Livre>) : RecyclerView.A
             view.setOnClickListener {
                 val livre = it.tag as Livre
 
+                // On set le livre dans les arguments de navigation
                 val direction = LivreCategorieFragmentDirections.actionNavLivreCategorieToDetailLivreFragment(livre)
                 it.findNavController().navigate(direction)
             }
@@ -43,6 +44,7 @@ class LivreRecyclerViewAdapter(private val values: List<Livre>) : RecyclerView.A
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(livre: Livre) {
+            // On lie les éléments d'un livre aux chamnps de texte présent dans la vue.
             view.txvTitre.text = livre.titre
             view.txvAuteur.text = "par "+livre.auteur
             Picasso.get().load(livre.imgurl).fit().centerInside().into(view.imvLivre)

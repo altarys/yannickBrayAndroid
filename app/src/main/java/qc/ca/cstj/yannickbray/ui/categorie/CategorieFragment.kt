@@ -37,6 +37,8 @@ class CategorieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rcvCategorie.layoutManager = LinearLayoutManager(this.context)
+
+        // On charge toutes les catégories et on les insère dans le recylcerView
         loadCategories()
         this.activity?.setTitle(R.string.menu_categorie)
     }
@@ -45,7 +47,7 @@ class CategorieFragment : Fragment() {
         Services.API_URL_GET_CATEGORIE.httpGet().responseJson {request, response, result ->
             when(result) {
                 is Result.Success -> {
-
+                    // Si on arrive à faire une requête à la BD. On insère les catégories à l'intérieur du recyclerView
                     categories = Json.parse(Categorie.serializer().list,  result.value.obj()["results"].toString())
                     rcvCategorie.adapter = CategorieRecyclerViewAdapter(categories)
                     rcvCategorie.adapter!!.notifyDataSetChanged()
