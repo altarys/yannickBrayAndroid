@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YannickBray.iml" filepath="$PROJECT_DIR$/YannickBray.iml" />
-      <module fileurl="file://$PROJECT_DIR$/YannickBrayAndroid-YannickBray.iml" filepath="$PROJECT_DIR$/YannickBrayAndroid-YannickBray.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/YannickBrayAndroid-app.iml" filepath="$PROJECT_DIR$/app/YannickBrayAndroid-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yannickBrayAndroid-YannickBray.iml" filepath="$PROJECT_DIR$/yannickBrayAndroid-YannickBray.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/yannickBrayAndroid-app.iml" filepath="$PROJECT_DIR$/app/yannickBrayAndroid-app.iml" />
     </modules>
   </component>
 </project>
