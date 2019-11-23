@@ -29,6 +29,7 @@ class SuccursaleRecyclerViewAdapter(private val values: List<Succursale>) : Recy
                 val succursale = it.tag as Succursale
 
                 val direction = SuccursaleFragmentDirections.actionNavSuccursaleToNavDetailSuccursale(succursale)
+                // Navigue vers DetailSuccursale en passant en paramètre la succursale cliquée
                 it.findNavController().navigate(direction)
             }
             bind(item)
@@ -37,6 +38,7 @@ class SuccursaleRecyclerViewAdapter(private val values: List<Succursale>) : Recy
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         fun bind(succursale: Succursale) {
+            // Affiche le nom de la succursale
             view.txvNom.text = succursale.appelatif
 
         }
