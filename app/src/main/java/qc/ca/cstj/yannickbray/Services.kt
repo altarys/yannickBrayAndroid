@@ -2,6 +2,8 @@ package qc.ca.cstj.yannickbray
 
 class Services {
     companion object {
+        // Jérémie Ouimet : J'ai un processeur AMD, donc j'utilise NOX et son localhost est 172.17.100.2
+
         val API_URL_GET_CATEGORIE = "http://10.0.2.2:4500/categories/"
         // val API_URL_GET_CATEGORIE = "http://172.17.100.2:4500/categories/"
 
